@@ -1,4 +1,4 @@
-# pakete
+# CGJ
  ## installation
  bitte führen sie das batch skript als administrator aus, sobald sie bei releases den ordner release entpackt haben
  ## Achtung ⚠ 
