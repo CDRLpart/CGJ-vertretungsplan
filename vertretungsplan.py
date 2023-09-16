@@ -171,11 +171,13 @@ button_anzeigen.place(relx=0.5, rely=0.26, anchor=tk.CENTER)
 vertretungen_text = scrolledtext.ScrolledText(window, font=("Arial", 14), state=tk.DISABLED)
 vertretungen_text.place(relx=0.5, rely=0.5, anchor=tk.CENTER, relwidth=0.8, relheight=0.4)
 
-# Starten des Party-Modus, wenn "party" in das Eingabefeld für die Klasse eingegeben wird
+# Starten des Party-Modus oder Anzeigen der Vertretungen, wenn "party" eingegeben wird
 def check_party_mode(event):
     klasse = eingabe_klasse.get().strip().lower()
     if klasse == "party":
         start_party_mode()
+    else:
+        zeige_vertretungen()
 
 eingabe_klasse.bind("<Return>", check_party_mode)
 
