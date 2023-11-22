@@ -1,6 +1,5 @@
 # CGJ
  ## installation
- bitte führen sie das batch skript als administrator aus, sobald sie bei releases den ordner release entpackt haben
+Wenn sie den MSI installer zur installation verwenden (Empfohlen), müssen sie ihn nur herunterladen, Doppelklicken und die anfage der benutzerkontensteuerung mit ja bestätigen
  ## Achtung ⚠ 
- dieser skript verwendet absolute Dateipfade. wenn sie ihn verändern möchten, müssen sie auch die dateipfade anpassen
-wenn es probleme bei der installation gibt, können sie die batch datei antpassen. wichtig ist aber das die dateien weiterhin in den ordner c:\vertretungsplan gespeichert werden
+ dieses skript verwendet absolute Dateipfade. wenn sie den speicherort verändern möchten, müssen sie auch die dateipfade im source code anpassen.
