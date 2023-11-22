@@ -7,6 +7,32 @@ import random
 import pygame
 import threading
 
+# Füge diese Funktion zum Laden des Verzeichnisses mit Abkürzungen hinzu
+def lade_lehrer_verzeichnis(dateipfad):
+    lehrer_verzeichnis = {}
+
+    try:
+        with open(dateipfad, 'r', encoding='utf-8') as datei:
+            for zeile in datei:
+                abkuerzung, name = zeile.strip().split('=')
+                lehrer_verzeichnis[abkuerzung.strip()] = name.strip()
+
+    except FileNotFoundError:
+        messagebox.showerror("Fehler", "Lehrerverzeichnis nicht gefunden.")
+        exit()
+
+    return lehrer_verzeichnis
+
+# Ersetze diese Variable mit dem tatsächlichen Dateipfad zu deiner Textdatei mit den Lehrerabkürzungen
+lehrer_verzeichnis_dateipfad = "C:/vertretungsplan_cgj/lehrer_verzeichnis.txt"
+lehrer_verzeichnis = lade_lehrer_verzeichnis(lehrer_verzeichnis_dateipfad)
+
+# Füge diese Funktion zum Ersetzen der Abkürzungen durch Namen hinzu
+def ersetze_lehrer_abkuerzungen(text):
+    for abkuerzung, name in lehrer_verzeichnis.items():
+        text = text.replace(abkuerzung, name)
+    return text
+
 # URL des Vertretungsplans
 url = "https://c-g-j.de/index.php?id=29"
 
@@ -68,6 +94,9 @@ def zeige_vertretungen():
                 stunde = i + 1
                 vertretung = column.text.strip().replace("\n", " ")
 
+                # Ersetze Abkürzungen durch Namen
+                vertretung = ersetze_lehrer_abkuerzungen(vertretung)
+
                 if vertretung != "":
                     vertretungen_text.insert(tk.END, f"Klasse: {klasse}\n")
                     vertretungen_text.insert(tk.END, f"Stunde: {stunde}\n")
@@ -84,6 +113,9 @@ def zeige_vertretungen():
         for i, column in enumerate(rows[1].find_all("td")[1:]):
             stunde = i + 1
             vertretung = column.text.strip().replace("\n", " ")
+
+            # Ersetze Abkürzungen durch Namen
+            vertretung = ersetze_lehrer_abkuerzungen(vertretung)
 
             if vertretung != "":
                 vertretungen_text.insert(tk.END, f"Stunde: {stunde}\n")
@@ -106,13 +138,13 @@ def zeige_vertretungen():
 
 def start_party_mode():
     # Musik abspielen (Sie müssen den Dateipfad zur Party-Musik angeben)
-    party_musik = "C://vertretungsplan_cgj//party_music.mp3"
+    party_musik = "C:/vertretungsplan_cgj/party_music.mp3"
     pygame.mixer.init()
     pygame.mixer.music.load(party_musik)
     pygame.mixer.music.play()
 
     # Hintergrund ändern (Sie müssen den Dateipfad zum Party-Hintergrundbild angeben)
-    party_hintergrund = "C://vertretungsplan_cgj//party_background.png"
+    party_hintergrund = "C:/vertretungsplan_cgj/party_background.png"
     background_image = tk.PhotoImage(file=party_hintergrund)
     background_label.configure(image=background_image)
     background_label.image = background_image
@@ -150,12 +182,12 @@ window.title("Vertretungsplan")
 window.state("zoomed")
 
 # Hintergrundbild
-background_image = tk.PhotoImage(file="C://vertretungsplan_cgj//background.png")
+background_image = tk.PhotoImage(file="C:/vertretungsplan_cgj/background.png")
 background_label = tk.Label(window, image=background_image)
 background_label.place(x=0, y=0, relwidth=1, relheight=1)
 
 # Logo
-logo_image = tk.PhotoImage(file="C://vertretungsplan_cgj//logo.png")
+logo_image = tk.PhotoImage(file="C:/vertretungsplan_cgj/logo.png")
 logo_label = tk.Label(window, image=logo_image)
 logo_label.place(relx=0.5, rely=0.1, anchor=tk.CENTER)
 
